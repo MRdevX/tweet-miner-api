@@ -7,7 +7,6 @@ dotenv.config({ path: path.join(__dirname, '../../.env') })
 const envVarsSchema = Joi.object()
     .keys({
         NODE_ENV: Joi.string().valid('production', 'development', 'test').required(),
-        PORT: Joi.number().default(3000),
         MONGODB_URL: Joi.string().required().description('Mongo DB url'),
         JWT_SECRET: Joi.string().required().description('JWT secret key'),
         JWT_ACCESS_EXPIRATION_MINUTES: Joi.number()
@@ -21,7 +20,6 @@ const envVarsSchema = Joi.object()
         SMTP_USERNAME: Joi.string().description('username for email server'),
         SMTP_PASSWORD: Joi.string().description('password for email server'),
         EMAIL_FROM: Joi.string().description('the from field in the emails sent by the app'),
-
         TWITTER_CONSUMER_KEY: Joi.string().description('twitter consumer key'),
         TWITTER_CONSUMER_SECRET: Joi.string().description('twitter consumer secret'),
         TWITTER_ACCESS_TOKEN: Joi.string().description('twitter access token'),
@@ -40,7 +38,6 @@ if (error) {
 
 module.exports = {
     env: envVars.NODE_ENV,
-    port: envVars.PORT,
     mongoose: {
         url: envVars.MONGODB_URL + (envVars.NODE_ENV === 'test' ? '-test' : ''),
         options: {
