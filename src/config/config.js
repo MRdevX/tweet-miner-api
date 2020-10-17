@@ -52,6 +52,13 @@ module.exports = {
         refreshExpirationDays: envVars.JWT_REFRESH_EXPIRATION_DAYS,
         resetPasswordExpirationMinutes: 10,
     },
+    twitter: {
+        consumer_key: envVars.TWITTER_CONSUMER_KEY,
+        consumer_secret: envVars.TWITTER_CONSUMER_SECRET,
+        access_token: envVars.TWITTER_ACCESS_TOKEN,
+        token_secret: envVars.TWITTER_TOKEN_SECRET,
+        bearer_token: envVars.TWITTER_BEARER_TOKEN,
+    },
     email: {
         smtp: {
             host: envVars.SMTP_HOST,
