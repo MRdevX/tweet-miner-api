@@ -17,22 +17,20 @@ const getTweetById = async (id) => {
     return Tweet.findById(id)
 }
 
-// const fetchRecentTweets = async (startTime, endTime, query) => {
-//     try {
-//         const response = await axios.get(
-//             `https://api.twitter.com/2/tweets/search/recent?from=${startDate}&to=${endDate}`,
-//         )
-//         const programs = response.data.details.list
-//         await Promise.all(
-//             programs.map(async (program) => {
-//                 await createProgram(program)
-//             }),
-//         )
-//         return programs.length
-//     } catch (err) {
-//         throw new ApiError(httpStatus.SERVICE_UNAVAILABLE, 'Service Unavailable')
-//     }
-// }
+const fetchRecentTweets = async (startTime, endTime, query) => {
+    try {
+        const response = await axios.get(`https://api.twitter.com/2/tweets/search/recent`)
+        // const programs = response.data.details.list
+        // await Promise.all(
+        //     programs.map(async (program) => {
+        //         await createProgram(program)
+        //     }),
+        // )
+        return response.data
+    } catch (err) {
+        throw new ApiError(httpStatus.SERVICE_UNAVAILABLE, 'Service Unavailable')
+    }
+}
 
 const updateTweetById = async (tweetId, updateBody) => {
     const tweet = await getTweetById(tweetId)

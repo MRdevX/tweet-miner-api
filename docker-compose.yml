@@ -3,9 +3,9 @@ version: '3'
 services:
     node-app:
         build: .
-        image: node-app
+        image: tweet-miner-app
         environment:
-            - MONGODB_URL=mongodb://mongodb:27017/tweet-miner-api
+            - MONGODB_URL=mongodb://mongodb:27017/tweet-miner-db
         ports:
             - '3000:3000'
         depends_on:
@@ -18,7 +18,7 @@ services:
     mongodb:
         image: mongo:4.2.1-bionic
         ports:
-            - '27017:27017'
+            - '27018:27017'
         volumes:
             - dbdata:/data/db
         networks:
@@ -30,3 +30,6 @@ volumes:
 networks:
     node-network:
         driver: bridge
+        ipam:
+            config:
+                - subnet: 172.16.57.0/24
