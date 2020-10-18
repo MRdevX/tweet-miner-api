@@ -7,6 +7,12 @@ const createTopic = async (topicBody) => {
     return topic
 }
 
+const buildTopicsQuery = async () => {
+    const topics = await Topic.find({}).select('title -_id').exec()
+    const query = topics.map((t) => t.title).join('"OR"')
+    return `"${query}"`
+}
+
 const queryTopics = async (filter, options) => {
     const topics = await Topic.paginate(filter, options)
     return topics
@@ -44,6 +50,7 @@ module.exports = {
     queryTopics,
     findTopic,
     getTopicById,
+    buildTopicsQuery,
     updateTopicById,
     deleteTopicById,
 }

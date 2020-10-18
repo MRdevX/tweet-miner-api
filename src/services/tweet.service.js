@@ -1,5 +1,6 @@
 const httpStatus = require('http-status')
 const axios = require('axios')
+const moment = require('moment') // require
 const config = require('../config/config')
 const { Tweet } = require('../models')
 const ApiError = require('../utils/ApiError')
@@ -18,11 +19,33 @@ const getTweetById = async (id) => {
     return Tweet.findById(id)
 }
 
+const getLatestTweetDate = async () => {
+    let latestTweetDate = moment().utc().day(-1).toISOString()
+    const latestTweet = await Tweet.findOne().sort({ created_at: -1 }).select('created_at -_id')
+    if (latestTweet) {
+        latestTweetDate = latestTweet.created_at
+    }
+
+    return latestTweetDate
+}
+
 const findTweet = async (query) => {
     return Tweet.findOne(query)
 }
 
-const fetchRecentTweets = async (query, limit) => {
+const saveFetchedTweets = async (tweets) => {
+    await Promise.all(
+        tweets.map(async (tweet) => {
+            const { id, created_at, text } = tweet
+            const duplicate = await Tweet.findOne({ tweet_id: id })
+            if (!duplicate) {
+                await createTweet({ created_at, text, tweet_id: id })
+            }
+        }),
+    )
+}
+
+const fetchRecentTweets = async (query, limit, start_time) => {
     try {
         const response = await axios({
             method: 'get',
@@ -34,19 +57,11 @@ const fetchRecentTweets = async (query, limit) => {
                 'tweet.fields': 'created_at',
                 max_results: limit,
                 query,
+                start_time,
             },
         })
         const tweets = response.data.data
-        await Promise.all(
-            tweets.map(async (tweet) => {
-                const { id, created_at, text } = tweet
-                const duplicate = await Tweet.findOne({ tweet_id: id })
-                if (!duplicate) {
-                    await createTweet({ created_at, text, tweet_id: id })
-                }
-            }),
-        )
-        return response.data
+        await saveFetchedTweets(tweets)
     } catch (err) {
         throw new ApiError(httpStatus.SERVICE_UNAVAILABLE, 'Service Unavailable')
     }
@@ -76,6 +91,8 @@ module.exports = {
     queryTweets,
     findTweet,
     getTweetById,
+    saveFetchedTweets,
+    getLatestTweetDate,
     fetchRecentTweets,
     updateTweetById,
     deleteTweetById,

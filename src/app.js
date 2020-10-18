@@ -1,6 +1,7 @@
 const express = require('express')
 const helmet = require('helmet')
 const xss = require('xss-clean')
+const cron = require('node-cron')
 const mongoSanitize = require('express-mongo-sanitize')
 const compression = require('compression')
 const cors = require('cors')
@@ -12,6 +13,7 @@ const { jwtStrategy } = require('./config/passport')
 const { authLimiter } = require('./middlewares/rateLimiter')
 const routes = require('./routes/v1')
 const { errorConverter, errorHandler } = require('./middlewares/error')
+const { topicService, tweetService } = require('./services')
 const ApiError = require('./utils/ApiError')
 
 const app = express()
@@ -63,5 +65,11 @@ app.use(errorConverter)
 
 // handle error
 app.use(errorHandler)
+
+cron.schedule('*/5 * * * * *', async () => {
+    const latestDate = await tweetService.getLatestTweetDate()
+    const query = await topicService.buildTopicsQuery()
+    await tweetService.fetchRecentTweets(query, 100, latestDate)
+})
 
 module.exports = app
