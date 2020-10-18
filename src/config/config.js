@@ -7,7 +7,6 @@ dotenv.config({ path: path.join(__dirname, '../../.env') })
 const envVarsSchema = Joi.object()
     .keys({
         NODE_ENV: Joi.string().valid('production', 'development', 'test').required(),
-        PORT: Joi.number().default(3000),
         MONGODB_URL: Joi.string().required().description('Mongo DB url'),
         JWT_SECRET: Joi.string().required().description('JWT secret key'),
         JWT_ACCESS_EXPIRATION_MINUTES: Joi.number()
@@ -21,6 +20,11 @@ const envVarsSchema = Joi.object()
         SMTP_USERNAME: Joi.string().description('username for email server'),
         SMTP_PASSWORD: Joi.string().description('password for email server'),
         EMAIL_FROM: Joi.string().description('the from field in the emails sent by the app'),
+        TWITTER_CONSUMER_KEY: Joi.string().description('twitter consumer key'),
+        TWITTER_CONSUMER_SECRET: Joi.string().description('twitter consumer secret'),
+        TWITTER_ACCESS_TOKEN: Joi.string().description('twitter access token'),
+        TWITTER_TOKEN_SECRET: Joi.string().description('twitter token secret'),
+        TWITTER_BEARER_TOKEN: Joi.string().required().description('twitter bearer token'),
     })
     .unknown()
 
@@ -34,7 +38,6 @@ if (error) {
 
 module.exports = {
     env: envVars.NODE_ENV,
-    port: envVars.PORT,
     mongoose: {
         url: envVars.MONGODB_URL + (envVars.NODE_ENV === 'test' ? '-test' : ''),
         options: {
@@ -48,6 +51,13 @@ module.exports = {
         accessExpirationMinutes: envVars.JWT_ACCESS_EXPIRATION_MINUTES,
         refreshExpirationDays: envVars.JWT_REFRESH_EXPIRATION_DAYS,
         resetPasswordExpirationMinutes: 10,
+    },
+    twitter: {
+        consumer_key: envVars.TWITTER_CONSUMER_KEY,
+        consumer_secret: envVars.TWITTER_CONSUMER_SECRET,
+        access_token: envVars.TWITTER_ACCESS_TOKEN,
+        token_secret: envVars.TWITTER_TOKEN_SECRET,
+        bearer_token: envVars.TWITTER_BEARER_TOKEN,
     },
     email: {
         smtp: {

@@ -1,8 +1,8 @@
 FROM node:alpine
 
-RUN mkdir -p /usr/src/node-app && chown -R node:node /usr/src/node-app
+RUN mkdir -p /usr/src/tweet-miner-app && chown -R node:node /usr/src/tweet-miner-app
 
-WORKDIR /usr/src/node-app
+WORKDIR /usr/src/tweet-miner-app
 
 COPY package.json yarn.lock ./
 
