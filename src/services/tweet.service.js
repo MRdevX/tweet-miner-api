@@ -53,6 +53,20 @@ const getLatestTweetDate = async () => {
 }
 
 /**
+ * Get Latest Tweet Date Stored in Database
+ * @returns {string}
+ */
+const getStartAndEndTimePeriod = (day) => {
+    const start_time = moment()
+        .utc()
+        .day(day - 1)
+        .toISOString()
+    const end_time = moment().utc().day(day).toISOString()
+
+    return { start_time, end_time }
+}
+
+/**
  * find tweet by query
  * @param {Object} query
  * @returns {Promise<Tweet>}
@@ -75,6 +89,41 @@ const saveFetchedTweets = async (tweets) => {
             }
         }),
     )
+}
+
+/**
+ * Call Twitter API and Fetched Desired Tweets
+ * @param {string} query - query to find tweets
+ * @param {number} limit - maximum results from twitter api
+ * @param {number} start_time - start from date
+ * @returns {Promise<QueryResult>}
+ */
+const fetchLastWeekTweets = async (query, limit, start_time, end_time, next_token) => {
+    try {
+        const response = await axios({
+            method: 'get',
+            url: 'https://api.twitter.com/2/tweets/search/recent',
+            headers: {
+                Authorization: `Bearer ${config.twitter.bearer_token}`,
+            },
+            params: {
+                'tweet.fields': 'created_at',
+                max_results: limit,
+                query,
+                start_time,
+                end_time,
+                next_token,
+            },
+        })
+        const { data, meta } = response.data
+        if (meta.result_count >= limit) {
+            const nest_token = meta.next_token
+            await fetchLastWeekTweets(query, limit, start_time, end_time, nest_token)
+        }
+        await saveFetchedTweets(data)
+    } catch (err) {
+        throw new ApiError(httpStatus.SERVICE_UNAVAILABLE, 'Service Unavailable')
+    }
 }
 
 /**
@@ -143,7 +192,9 @@ module.exports = {
     getTweetById,
     saveFetchedTweets,
     getLatestTweetDate,
+    fetchLastWeekTweets,
     fetchRecentTweets,
+    getStartAndEndTimePeriod,
     updateTweetById,
     deleteTweetById,
 }
