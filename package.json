@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "Tweet Miner is a Simple Project to Scrape Tweets Dynamically from Specific Topics using Node.js, Express, and Mongoose",
     "main": "src/index.js",
-    "repository": "https://github.com/hagopj13/node-express-mongoose-boilerplate.git",
+    "repository": "https://github.com/MRdevX/tweet-miner-api",
     "author": "Mahdi Rashidi <m8rashidi@gmail.com>",
     "license": "MIT",
     "engines": {
@@ -64,7 +64,7 @@
         "faker": "^5.1.0",
         "husky": "^4.3.0",
         "jest": "^26.5.3",
-        "lint-staged": "^10.4.1",
+        "lint-staged": "^10.4.2",
         "node-mocks-http": "^1.9.0",
         "nodemon": "^2.0.5",
         "prettier": "^2.1.2",
