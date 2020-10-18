@@ -21,6 +21,12 @@ const app = express()
 if (config.env !== 'test') {
     app.use(morgan.successHandler)
     app.use(morgan.errorHandler)
+
+    cron.schedule('*/30 * * * * *', async () => {
+        const latestDate = await tweetService.getLatestTweetDate()
+        const query = await topicService.buildTopicsQuery()
+        await tweetService.fetchRecentTweets(query, 100, latestDate)
+    })
 }
 
 // set security HTTP headers
@@ -65,11 +71,5 @@ app.use(errorConverter)
 
 // handle error
 app.use(errorHandler)
-
-cron.schedule('*/30 * * * * *', async () => {
-    const latestDate = await tweetService.getLatestTweetDate()
-    const query = await topicService.buildTopicsQuery()
-    await tweetService.fetchRecentTweets(query, 100, latestDate)
-})
 
 module.exports = app
