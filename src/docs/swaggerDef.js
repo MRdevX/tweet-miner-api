@@ -1,20 +1,27 @@
 const { version } = require('../../package.json')
-const config = require('../config/config')
 
 const swaggerDef = {
     openapi: '3.0.0',
     info: {
-        title: 'node-express-mongoose-boilerplate API documentation',
+        title: 'Tweet Miner API Documentation',
+        description:
+            'Tweet Miner is a Simple Project to Scrape Tweets Dynamically from Specific Topics using Node.js, Express, and Mongoose',
         version,
+        contact: {
+            name: 'The API Developer <Mahdi Rashidi>',
+            email: 'm8rashidi@gmail.com',
+        },
         license: {
             name: 'MIT',
-            url:
-                'https://github.com/hagopj13/node-express-mongoose-boilerplate/blob/master/LICENSE',
+            url: 'https://github.com/MRdevX/tweet-miner-api',
         },
     },
     servers: [
         {
-            url: `http://localhost:${config.port}/v1`,
+            url: `https://tweet-miner-app.herokuapp.com/v1`,
+        },
+        {
+            url: `http://localhost:${process.env.PORT}/v1`,
         },
     ],
 }
