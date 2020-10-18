@@ -5,7 +5,6 @@ const createTweet = {
     body: Joi.object().keys({
         tweet_id: Joi.string().required(),
         text: Joi.string().required(),
-        topic: Joi.string().custom(objectId),
         created_at: Joi.date(),
     }),
 }
@@ -14,7 +13,6 @@ const getTweets = {
     query: Joi.object().keys({
         tweet_id: Joi.string(),
         text: Joi.string(),
-        topic: Joi.string().custom(objectId),
         created_at: Joi.date(),
 
         sortBy: Joi.string(),
@@ -37,7 +35,6 @@ const updateTweet = {
         .keys({
             tweet_id: Joi.string(),
             text: Joi.string(),
-            topic: Joi.string().custom(objectId),
             created_at: Joi.date(),
         })
         .min(1),

@@ -8,10 +8,6 @@ const topicSchema = mongoose.Schema(
             required: true,
             trim: true,
         },
-        slug: {
-            type: String,
-            trim: true,
-        },
     },
     {
         timestamps: true,

@@ -12,10 +12,6 @@ const tweetSchema = mongoose.Schema(
             type: String,
             trim: true,
         },
-        topic: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Topic',
-        },
         created_at: {
             type: Date,
         },

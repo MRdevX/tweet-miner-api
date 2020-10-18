@@ -10,7 +10,7 @@ const createTweet = catchAsync(async (req, res) => {
 })
 
 const getTweets = catchAsync(async (req, res) => {
-    const filter = pick(req.query, ['tweet_id', 'text', 'topic', 'created_at'])
+    const filter = pick(req.query, ['tweet_id', 'text', 'created_at'])
     const options = pick(req.query, ['sortBy', 'limit', 'page'])
     const result = await tweetService.queryTweets(filter, options)
     res.send(result)

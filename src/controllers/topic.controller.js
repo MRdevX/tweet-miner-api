@@ -10,7 +10,7 @@ const createTopic = catchAsync(async (req, res) => {
 })
 
 const getTopics = catchAsync(async (req, res) => {
-    const filter = pick(req.query, ['title', 'slug'])
+    const filter = pick(req.query, ['title'])
     const options = pick(req.query, ['sortBy', 'limit', 'page'])
     const result = await topicService.queryTopics(filter, options)
     res.send(result)
