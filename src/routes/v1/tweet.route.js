@@ -21,4 +21,6 @@ router
         tweetController.deleteTweet,
     )
 
+router.route('/search').put(tweetController.fetchTweets)
+
 module.exports = router

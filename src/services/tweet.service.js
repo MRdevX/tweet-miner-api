@@ -1,5 +1,6 @@
 const httpStatus = require('http-status')
 const axios = require('axios')
+const config = require('../config/config')
 const { Tweet } = require('../models')
 const ApiError = require('../utils/ApiError')
 
@@ -17,15 +18,34 @@ const getTweetById = async (id) => {
     return Tweet.findById(id)
 }
 
-const fetchRecentTweets = async (startTime, endTime, query) => {
+const findTweet = async (query) => {
+    return Tweet.findOne(query)
+}
+
+const fetchRecentTweets = async (query, limit) => {
     try {
-        const response = await axios.get(`https://api.twitter.com/2/tweets/search/recent`)
-        // const programs = response.data.details.list
-        // await Promise.all(
-        //     programs.map(async (program) => {
-        //         await createProgram(program)
-        //     }),
-        // )
+        const response = await axios({
+            method: 'get',
+            url: 'https://api.twitter.com/2/tweets/search/recent',
+            headers: {
+                Authorization: `Bearer ${config.twitter.bearer_token}`,
+            },
+            params: {
+                'tweet.fields': 'created_at',
+                max_results: limit,
+                query,
+            },
+        })
+        const tweets = response.data.data
+        await Promise.all(
+            tweets.map(async (tweet) => {
+                const { id, created_at, text } = tweet
+                const duplicate = await Tweet.findOne({ tweet_id: id })
+                if (!duplicate) {
+                    await createTweet({ created_at, text, tweet_id: id })
+                }
+            }),
+        )
         return response.data
     } catch (err) {
         throw new ApiError(httpStatus.SERVICE_UNAVAILABLE, 'Service Unavailable')
@@ -54,6 +74,7 @@ const deleteTweetById = async (tweetId) => {
 module.exports = {
     createTweet,
     queryTweets,
+    findTweet,
     getTweetById,
     fetchRecentTweets,
     updateTweetById,

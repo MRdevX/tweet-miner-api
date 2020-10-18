@@ -1,5 +1,5 @@
 {
-    "name": "tweet-miner-api",
+    "name": "tweet-miner-app",
     "version": "1.0.0",
     "description": "Tweet Miner is a Simple Project to Scrape Tweets Dynamically from Specific Topics using Node.js, Express, and Mongoose",
     "main": "src/index.js",

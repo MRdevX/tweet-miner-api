@@ -16,6 +16,11 @@ const getTweets = catchAsync(async (req, res) => {
     res.send(result)
 })
 
+const fetchTweets = catchAsync(async (req, res) => {
+    const result = await tweetService.fetchRecentTweets('docker', 20)
+    res.send(result)
+})
+
 const getTweet = catchAsync(async (req, res) => {
     const tweet = await tweetService.getTweetById(req.params.tweetId)
     if (!tweet) {
@@ -38,6 +43,7 @@ module.exports = {
     createTweet,
     getTweets,
     getTweet,
+    fetchTweets,
     updateTweet,
     deleteTweet,
 }
