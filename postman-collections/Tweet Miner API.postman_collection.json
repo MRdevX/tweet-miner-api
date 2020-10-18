@@ -1,838 +1,710 @@
 {
-	"info": {
-		"_postman_id": "0ce37bd9-41ec-473b-9054-00ab4a3b053e",
-		"name": "Tweet Miner API",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-	},
-	"item": [
-		{
-			"name": "Authentication",
-			"item": [
-				{
-					"name": "Register",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "2fab5110-6ac2-4679-966b-32692dd80dc3",
-								"exec": [
-									"const response = pm.response.json();",
-									"pm.environment.set(\"token\",\"Bearer \"+response.tokens.access.token);",
-									"pm.environment.set(\"rtoken\",response.tokens.refresh.token);",
-									"",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"email\": \"user@example.com\",\n    \"name\": \"fake user\",\n    \"password\": \"password1\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{server_address}}/v1/auth/register",
-							"host": [
-								"{{server_address}}"
-							],
-							"path": [
-								"v1",
-								"auth",
-								"register"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Login",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "5a9e9caa-4764-407e-91ea-494d00e3e3e8",
-								"exec": [
-									"const response = pm.response.json();",
-									"pm.environment.set(\"token\",\"Bearer \" + response.tokens.access.token);",
-									"pm.environment.set(\"rtoken\",response.tokens.refresh.token);",
-									"",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"email\": \"mahdi@example.com\",\n    \"password\": \"password1\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{server_address}}/v1/auth/login",
-							"host": [
-								"{{server_address}}"
-							],
-							"path": [
-								"v1",
-								"auth",
-								"login"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Login",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"username\": \"mahdi.rashidi\",\n    \"password\": \"En@@@321\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{server_address}}/api/auth/login",
-									"host": [
-										"{{server_address}}"
-									],
-									"path": [
-										"api",
-										"auth",
-										"login"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Security-Policy",
-									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
-								},
-								{
-									"key": "X-DNS-Prefetch-Control",
-									"value": "off"
-								},
-								{
-									"key": "Expect-CT",
-									"value": "max-age=0"
-								},
-								{
-									"key": "X-Frame-Options",
-									"value": "SAMEORIGIN"
-								},
-								{
-									"key": "Strict-Transport-Security",
-									"value": "max-age=15552000; includeSubDomains"
-								},
-								{
-									"key": "X-Download-Options",
-									"value": "noopen"
-								},
-								{
-									"key": "X-Content-Type-Options",
-									"value": "nosniff"
-								},
-								{
-									"key": "X-Permitted-Cross-Domain-Policies",
-									"value": "none"
-								},
-								{
-									"key": "Referrer-Policy",
-									"value": "no-referrer"
-								},
-								{
-									"key": "X-XSS-Protection",
-									"value": "0"
-								},
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "*"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "734"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"2de-EAUxpLPJmMybU8N5AkL3UpFK408\""
-								},
-								{
-									"key": "Vary",
-									"value": "Accept-Encoding"
-								},
-								{
-									"key": "Date",
-									"value": "Wed, 12 Aug 2020 03:39:20 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"error\": false,\n    \"result_number\": \"1\",\n    \"message\": {\n        \"user\": {\n            \"role\": \"user\",\n            \"is_admin\": false,\n            \"username\": \"mahdi.rashidi\",\n            \"email\": \"m8rashidi@gmail.com\",\n            \"created_time\": \"2020-08-11T21:17:12.601Z\",\n            \"updated_time\": \"2020-08-11T21:17:12.601Z\",\n            \"id\": \"5f330ad8a79d2805d0514099\"\n        },\n        \"tokens\": {\n            \"access\": {\n                \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZjMzMGFkOGE3OWQyODA1ZDA1MTQwOTkiLCJpYXQiOjE1OTcyMDM1NjAsImV4cCI6MTU5NzIwNTM2MH0.Lwru2_QIatOc1k9iSOPG8kMwwbF20utfDNRXEqespTQ\",\n                \"expires\": \"2020-08-12T04:09:20.652Z\"\n            },\n            \"refresh\": {\n                \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZjMzMGFkOGE3OWQyODA1ZDA1MTQwOTkiLCJpYXQiOjE1OTcyMDM1NjAsImV4cCI6MTU5OTc5NTU2MH0.62ibhTiujQUDSb-0IT57TuTN2NXoUEN95PgsWMMByLY\",\n                \"expires\": \"2020-09-11T03:39:20.653Z\"\n            }\n        }\n    }\n}"
-						}
-					]
-				},
-				{
-					"name": "Forgot Password",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "def69324-9cd4-4381-add6-f12a8653a389",
-								"exec": [
-									"const response = pm.response.json();",
-									"pm.environment.set(\"token\",response.message.token);",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"username\": \"mahdi.rashidi\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{server_address}}/v1/auth/forgot-password",
-							"host": [
-								"{{server_address}}"
-							],
-							"path": [
-								"v1",
-								"auth",
-								"forgot-password"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Refresh Tokens",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "002a6e8d-1eec-422b-9974-35bb454fbab0",
-								"exec": [
-									"const response = pm.response.json();",
-									"pm.environment.set(\"token\",\"Bearer \" +response.access.token);",
-									"pm.environment.set(\"rtoken\",response.refresh.token);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"type": "text",
-								"value": " {{token}}"
-							}
-						],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "refreshToken",
-									"value": "{{rtoken}}",
-									"type": "text"
-								}
-							],
-							"options": {
-								"urlencoded": {}
-							}
-						},
-						"url": {
-							"raw": "{{server_address}}/v1/auth/refresh-tokens",
-							"host": [
-								"{{server_address}}"
-							],
-							"path": [
-								"v1",
-								"auth",
-								"refresh-tokens"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Reset Password",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "44737017-d144-4a7c-80bd-c4257a8e0f53",
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"password\":\"En@321\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{server_address}}/v1/auth/reset-password?token={{token}}",
-							"host": [
-								"{{server_address}}"
-							],
-							"path": [
-								"v1",
-								"auth",
-								"reset-password"
-							],
-							"query": [
-								{
-									"key": "token",
-									"value": "{{token}}"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "User",
-			"item": [
-				{
-					"name": "List",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{server_address}}/v1/users/",
-							"host": [
-								"{{server_address}}"
-							],
-							"path": [
-								"v1",
-								"users",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"Test User\",\n    \"email\": \"test@gmail.com\",\n    \"password\": \"Sch@54321\",\n    \"role\": \"user\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{server_address}}/v1/users/",
-							"host": [
-								"{{server_address}}"
-							],
-							"path": [
-								"v1",
-								"users",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Retrieve",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{server_address}}/v1/users/5f82ef2cbe7dc903e6c2f0dc",
-							"host": [
-								"{{server_address}}"
-							],
-							"path": [
-								"v1",
-								"users",
-								"5f82ef2cbe7dc903e6c2f0dc"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update",
-					"request": {
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"role\":\"admin\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{server_address}}/v1/users/5f82f03ed3052504a1007f0b",
-							"host": [
-								"{{server_address}}"
-							],
-							"path": [
-								"v1",
-								"users",
-								"5f82f03ed3052504a1007f0b"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{server_address}}/v1/users/5f82ed552885d300527d399b",
-							"host": [
-								"{{server_address}}"
-							],
-							"path": [
-								"v1",
-								"users",
-								"5f82ed552885d300527d399b"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "Topic",
-			"item": [
-				{
-					"name": "List",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{server_address}}/v1/topics/",
-							"host": [
-								"{{server_address}}"
-							],
-							"path": [
-								"v1",
-								"topics",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"title\": \"Docker\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{server_address}}/v1/topics/",
-							"host": [
-								"{{server_address}}"
-							],
-							"path": [
-								"v1",
-								"topics",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Retrieve",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{server_address}}/v1/topics/5f82ef2cbe7dc903e6c2f0dc",
-							"host": [
-								"{{server_address}}"
-							],
-							"path": [
-								"v1",
-								"topics",
-								"5f82ef2cbe7dc903e6c2f0dc"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update",
-					"request": {
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"nameFa\":\"شبکه من و تو\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{server_address}}/v1/topics/5f8aa0d77643c33898acb2f8",
-							"host": [
-								"{{server_address}}"
-							],
-							"path": [
-								"v1",
-								"topics",
-								"5f8aa0d77643c33898acb2f8"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{server_address}}/v1/topics/5f82ed552885d300527d399b",
-							"host": [
-								"{{server_address}}"
-							],
-							"path": [
-								"v1",
-								"topics",
-								"5f82ed552885d300527d399b"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "Tweet",
-			"item": [
-				{
-					"name": "List",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{server_address}}/v1/tweets/?limit=100",
-							"host": [
-								"{{server_address}}"
-							],
-							"path": [
-								"v1",
-								"tweets",
-								""
-							],
-							"query": [
-								{
-									"key": "limit",
-									"value": "100"
-								},
-								{
-									"key": "sortBy",
-									"value": "showTitle:desc",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"Manoto TV\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{server_address}}/v1/tweets/",
-							"host": [
-								"{{server_address}}"
-							],
-							"path": [
-								"v1",
-								"tweets",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Retrieve",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{server_address}}/v1/tweets/5f82ef2cbe7dc903e6c2f0dc",
-							"host": [
-								"{{server_address}}"
-							],
-							"path": [
-								"v1",
-								"tweets",
-								"5f82ef2cbe7dc903e6c2f0dc"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update",
-					"request": {
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"role\":\"admin\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{server_address}}/v1/tweets/5f82f03ed3052504a1007f0b",
-							"host": [
-								"{{server_address}}"
-							],
-							"path": [
-								"v1",
-								"tweets",
-								"5f82f03ed3052504a1007f0b"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{server_address}}/v1/tweets/5f82ed552885d300527d399b",
-							"host": [
-								"{{server_address}}"
-							],
-							"path": [
-								"v1",
-								"tweets",
-								"5f82ed552885d300527d399b"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"protocolProfileBehavior": {}
-		}
-	],
-	"protocolProfileBehavior": {}
+    "info": {
+        "_postman_id": "0ce37bd9-41ec-473b-9054-00ab4a3b053e",
+        "name": "Tweet Miner API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Authentication",
+            "item": [
+                {
+                    "name": "Register",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "id": "2fab5110-6ac2-4679-966b-32692dd80dc3",
+                                "exec": [
+                                    "const response = pm.response.json();",
+                                    "pm.environment.set(\"token\",\"Bearer \"+response.tokens.access.token);",
+                                    "pm.environment.set(\"rtoken\",response.tokens.refresh.token);",
+                                    "",
+                                    ""
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"user@example.com\",\n    \"name\": \"fake user\",\n    \"password\": \"password1\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{server_address}}/v1/auth/register",
+                            "host": ["{{server_address}}"],
+                            "path": ["v1", "auth", "register"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Login",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "id": "5a9e9caa-4764-407e-91ea-494d00e3e3e8",
+                                "exec": [
+                                    "const response = pm.response.json();",
+                                    "pm.environment.set(\"token\",\"Bearer \" + response.tokens.access.token);",
+                                    "pm.environment.set(\"rtoken\",response.tokens.refresh.token);",
+                                    "",
+                                    ""
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "type": "text",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"mahdi@example.com\",\n    \"password\": \"password1\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{server_address}}/v1/auth/login",
+                            "host": ["{{server_address}}"],
+                            "path": ["v1", "auth", "login"]
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Login",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "type": "text",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"username\": \"mahdi.rashidi\",\n    \"password\": \"En@@@321\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "{{server_address}}/api/auth/login",
+                                    "host": ["{{server_address}}"],
+                                    "path": ["api", "auth", "login"]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Security-Policy",
+                                    "value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+                                },
+                                {
+                                    "key": "X-DNS-Prefetch-Control",
+                                    "value": "off"
+                                },
+                                {
+                                    "key": "Expect-CT",
+                                    "value": "max-age=0"
+                                },
+                                {
+                                    "key": "X-Frame-Options",
+                                    "value": "SAMEORIGIN"
+                                },
+                                {
+                                    "key": "Strict-Transport-Security",
+                                    "value": "max-age=15552000; includeSubDomains"
+                                },
+                                {
+                                    "key": "X-Download-Options",
+                                    "value": "noopen"
+                                },
+                                {
+                                    "key": "X-Content-Type-Options",
+                                    "value": "nosniff"
+                                },
+                                {
+                                    "key": "X-Permitted-Cross-Domain-Policies",
+                                    "value": "none"
+                                },
+                                {
+                                    "key": "Referrer-Policy",
+                                    "value": "no-referrer"
+                                },
+                                {
+                                    "key": "X-XSS-Protection",
+                                    "value": "0"
+                                },
+                                {
+                                    "key": "Access-Control-Allow-Origin",
+                                    "value": "*"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json; charset=utf-8"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "734"
+                                },
+                                {
+                                    "key": "ETag",
+                                    "value": "W/\"2de-EAUxpLPJmMybU8N5AkL3UpFK408\""
+                                },
+                                {
+                                    "key": "Vary",
+                                    "value": "Accept-Encoding"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 12 Aug 2020 03:39:20 GMT"
+                                },
+                                {
+                                    "key": "Connection",
+                                    "value": "keep-alive"
+                                }
+                            ],
+                            "cookie": [],
+                            "body": "{\n    \"error\": false,\n    \"result_number\": \"1\",\n    \"message\": {\n        \"user\": {\n            \"role\": \"user\",\n            \"is_admin\": false,\n            \"username\": \"mahdi.rashidi\",\n            \"email\": \"m8rashidi@gmail.com\",\n            \"created_time\": \"2020-08-11T21:17:12.601Z\",\n            \"updated_time\": \"2020-08-11T21:17:12.601Z\",\n            \"id\": \"5f330ad8a79d2805d0514099\"\n        },\n        \"tokens\": {\n            \"access\": {\n                \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZjMzMGFkOGE3OWQyODA1ZDA1MTQwOTkiLCJpYXQiOjE1OTcyMDM1NjAsImV4cCI6MTU5NzIwNTM2MH0.Lwru2_QIatOc1k9iSOPG8kMwwbF20utfDNRXEqespTQ\",\n                \"expires\": \"2020-08-12T04:09:20.652Z\"\n            },\n            \"refresh\": {\n                \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZjMzMGFkOGE3OWQyODA1ZDA1MTQwOTkiLCJpYXQiOjE1OTcyMDM1NjAsImV4cCI6MTU5OTc5NTU2MH0.62ibhTiujQUDSb-0IT57TuTN2NXoUEN95PgsWMMByLY\",\n                \"expires\": \"2020-09-11T03:39:20.653Z\"\n            }\n        }\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Forgot Password",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "id": "def69324-9cd4-4381-add6-f12a8653a389",
+                                "exec": [
+                                    "const response = pm.response.json();",
+                                    "pm.environment.set(\"token\",response.message.token);",
+                                    ""
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "type": "text",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"username\": \"mahdi.rashidi\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{server_address}}/v1/auth/forgot-password",
+                            "host": ["{{server_address}}"],
+                            "path": ["v1", "auth", "forgot-password"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Refresh Tokens",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "id": "002a6e8d-1eec-422b-9974-35bb454fbab0",
+                                "exec": [
+                                    "const response = pm.response.json();",
+                                    "pm.environment.set(\"token\",\"Bearer \" +response.access.token);",
+                                    "pm.environment.set(\"rtoken\",response.refresh.token);"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "auth": {
+                            "type": "noauth"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "type": "text",
+                                "value": " {{token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "urlencoded",
+                            "urlencoded": [
+                                {
+                                    "key": "refreshToken",
+                                    "value": "{{rtoken}}",
+                                    "type": "text"
+                                }
+                            ],
+                            "options": {
+                                "urlencoded": {}
+                            }
+                        },
+                        "url": {
+                            "raw": "{{server_address}}/v1/auth/refresh-tokens",
+                            "host": ["{{server_address}}"],
+                            "path": ["v1", "auth", "refresh-tokens"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Reset Password",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "id": "44737017-d144-4a7c-80bd-c4257a8e0f53",
+                                "exec": [""],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "type": "text",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"password\":\"En@321\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{server_address}}/v1/auth/reset-password?token={{token}}",
+                            "host": ["{{server_address}}"],
+                            "path": ["v1", "auth", "reset-password"],
+                            "query": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ],
+            "protocolProfileBehavior": {}
+        },
+        {
+            "name": "User",
+            "item": [
+                {
+                    "name": "List",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{server_address}}/v1/users/",
+                            "host": ["{{server_address}}"],
+                            "path": ["v1", "users", ""]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Create",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Test User\",\n    \"email\": \"test@gmail.com\",\n    \"password\": \"Sch@54321\",\n    \"role\": \"user\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{server_address}}/v1/users/",
+                            "host": ["{{server_address}}"],
+                            "path": ["v1", "users", ""]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Retrieve",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{server_address}}/v1/users/5f82ef2cbe7dc903e6c2f0dc",
+                            "host": ["{{server_address}}"],
+                            "path": ["v1", "users", "5f82ef2cbe7dc903e6c2f0dc"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"role\":\"admin\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{server_address}}/v1/users/5f82f03ed3052504a1007f0b",
+                            "host": ["{{server_address}}"],
+                            "path": ["v1", "users", "5f82f03ed3052504a1007f0b"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{server_address}}/v1/users/5f82ed552885d300527d399b",
+                            "host": ["{{server_address}}"],
+                            "path": ["v1", "users", "5f82ed552885d300527d399b"]
+                        }
+                    },
+                    "response": []
+                }
+            ],
+            "protocolProfileBehavior": {}
+        },
+        {
+            "name": "Topic",
+            "item": [
+                {
+                    "name": "List",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{server_address}}/v1/topics/",
+                            "host": ["{{server_address}}"],
+                            "path": ["v1", "topics", ""]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Create",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"title\": \"Docker\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{server_address}}/v1/topics/",
+                            "host": ["{{server_address}}"],
+                            "path": ["v1", "topics", ""]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Retrieve",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{server_address}}/v1/topics/5f82ef2cbe7dc903e6c2f0dc",
+                            "host": ["{{server_address}}"],
+                            "path": ["v1", "topics", "5f82ef2cbe7dc903e6c2f0dc"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"nameFa\":\"شبکه من و تو\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{server_address}}/v1/topics/5f8aa0d77643c33898acb2f8",
+                            "host": ["{{server_address}}"],
+                            "path": ["v1", "topics", "5f8aa0d77643c33898acb2f8"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{server_address}}/v1/topics/5f82ed552885d300527d399b",
+                            "host": ["{{server_address}}"],
+                            "path": ["v1", "topics", "5f82ed552885d300527d399b"]
+                        }
+                    },
+                    "response": []
+                }
+            ],
+            "protocolProfileBehavior": {}
+        },
+        {
+            "name": "Tweet",
+            "item": [
+                {
+                    "name": "List",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{server_address}}/v1/tweets/?limit=100",
+                            "host": ["{{server_address}}"],
+                            "path": ["v1", "tweets", ""],
+                            "query": [
+                                {
+                                    "key": "limit",
+                                    "value": "100"
+                                },
+                                {
+                                    "key": "sortBy",
+                                    "value": "showTitle:desc",
+                                    "disabled": true
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Create",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Manoto TV\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{server_address}}/v1/tweets/",
+                            "host": ["{{server_address}}"],
+                            "path": ["v1", "tweets", ""]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Retrieve",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{server_address}}/v1/tweets/5f82ef2cbe7dc903e6c2f0dc",
+                            "host": ["{{server_address}}"],
+                            "path": ["v1", "tweets", "5f82ef2cbe7dc903e6c2f0dc"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"role\":\"admin\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{server_address}}/v1/tweets/5f82f03ed3052504a1007f0b",
+                            "host": ["{{server_address}}"],
+                            "path": ["v1", "tweets", "5f82f03ed3052504a1007f0b"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{server_address}}/v1/tweets/5f82ed552885d300527d399b",
+                            "host": ["{{server_address}}"],
+                            "path": ["v1", "tweets", "5f82ed552885d300527d399b"]
+                        }
+                    },
+                    "response": []
+                }
+            ],
+            "protocolProfileBehavior": {}
+        }
+    ],
+    "protocolProfileBehavior": {}
 }
