@@ -1,19 +1,17 @@
 const Joi = require('joi')
-const { password, objectId } = require('./custom.validation')
+const { objectId } = require('./custom.validation')
 
 const createTopic = {
     body: Joi.object().keys({
-        email: Joi.string().required().email(),
-        password: Joi.string().required().custom(password),
-        name: Joi.string().required(),
-        role: Joi.string().required().valid('topic', 'admin'),
+        title: Joi.string().required(),
     }),
 }
 
 const getTopics = {
     query: Joi.object().keys({
-        name: Joi.string(),
-        role: Joi.string(),
+        title: Joi.string(),
+        slug: Joi.string(),
+
         sortBy: Joi.string(),
         limit: Joi.number().integer(),
         page: Joi.number().integer(),
@@ -32,9 +30,8 @@ const updateTopic = {
     }),
     body: Joi.object()
         .keys({
-            email: Joi.string().email(),
-            password: Joi.string().custom(password),
-            name: Joi.string(),
+            title: Joi.string(),
+            slug: Joi.string(),
         })
         .min(1),
 }

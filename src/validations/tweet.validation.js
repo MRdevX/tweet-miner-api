@@ -1,19 +1,22 @@
 const Joi = require('joi')
-const { password, objectId } = require('./custom.validation')
+const { objectId } = require('./custom.validation')
 
 const createTweet = {
     body: Joi.object().keys({
-        email: Joi.string().required().email(),
-        password: Joi.string().required().custom(password),
-        name: Joi.string().required(),
-        role: Joi.string().required().valid('tweet', 'admin'),
+        tweet_id: Joi.string().required(),
+        text: Joi.string().required(),
+        topic: Joi.string().custom(objectId),
+        created_at: Joi.date(),
     }),
 }
 
 const getTweets = {
     query: Joi.object().keys({
-        name: Joi.string(),
-        role: Joi.string(),
+        tweet_id: Joi.string(),
+        text: Joi.string(),
+        topic: Joi.string().custom(objectId),
+        created_at: Joi.date(),
+
         sortBy: Joi.string(),
         limit: Joi.number().integer(),
         page: Joi.number().integer(),
@@ -32,9 +35,10 @@ const updateTweet = {
     }),
     body: Joi.object()
         .keys({
-            email: Joi.string().email(),
-            password: Joi.string().custom(password),
-            name: Joi.string(),
+            tweet_id: Joi.string(),
+            text: Joi.string(),
+            topic: Joi.string().custom(objectId),
+            created_at: Joi.date(),
         })
         .min(1),
 }

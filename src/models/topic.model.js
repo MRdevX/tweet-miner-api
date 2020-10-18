@@ -3,21 +3,14 @@ const { toJSON, paginate } = require('./plugins')
 
 const topicSchema = mongoose.Schema(
     {
-        topic_id: {
+        title: {
             type: String,
             required: true,
             trim: true,
         },
-        text: {
+        slug: {
             type: String,
             trim: true,
-        },
-        topic: {
-            type: String,
-            trim: true,
-        },
-        created_at: {
-            type: Date,
         },
     },
     {
