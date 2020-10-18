@@ -22,11 +22,28 @@ if (config.env !== 'test') {
     app.use(morgan.successHandler)
     app.use(morgan.errorHandler)
 
-    cron.schedule('*/30 * * * * *', async () => {
+    cron.schedule('*/15 * * * * *', async () => {
         const latestDate = await tweetService.getLatestTweetDate()
         const query = await topicService.buildTopicsQuery()
         await tweetService.fetchRecentTweets(query, 100, latestDate)
     })
+
+    let day = -6
+    const weekTask = cron.schedule(
+        '*/25 * * * * *',
+        async () => {
+            const { start_time, end_time } = tweetService.getStartAndEndTimePeriod(day)
+            const query = await topicService.buildTopicsQuery()
+            tweetService.fetchLastWeekTweets(query, 100, start_time, end_time)
+            day += 1
+            if (day === 0) {
+                weekTask.stop()
+                weekTask.destroy()
+            }
+        },
+        { scheduled: false },
+    )
+    weekTask.start()
 }
 
 // set security HTTP headers
