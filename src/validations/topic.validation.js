@@ -10,7 +10,6 @@ const createTopic = {
 const getTopics = {
     query: Joi.object().keys({
         title: Joi.string(),
-        slug: Joi.string(),
 
         sortBy: Joi.string(),
         limit: Joi.number().integer(),
@@ -31,7 +30,6 @@ const updateTopic = {
     body: Joi.object()
         .keys({
             title: Joi.string(),
-            slug: Joi.string(),
         })
         .min(1),
 }
