@@ -1,5 +1,6 @@
 # Tweet Miner App
 
+[![Build Status](https://travis-ci.org/MRdevX/tweet-miner-api.svg?branch=master)](https://travis-ci.org/MRdevX/tweet-miner-api)
 [![Coverage Status](https://coveralls.io/repos/github/MRdevX/tweet-miner-api/badge.svg?branch=master)](https://coveralls.io/github/MRdevX/tweet-miner-api?branch=master)
 
 Tweet Miner is a Simple Project to Scrape Tweets Dynamically from Specific Topics.
