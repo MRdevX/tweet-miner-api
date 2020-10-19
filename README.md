@@ -1,5 +1,7 @@
 # Tweet Miner App
 
+[![Coverage Status](https://coveralls.io/repos/github/MRdevX/tweet-miner-api/badge.svg?branch=master)](https://coveralls.io/github/MRdevX/tweet-miner-api?branch=master)
+
 Tweet Miner is a Simple Project to Scrape Tweets Dynamically from Specific Topics.
 
 It comes with many features, such as authentication using JWT, request validation, unit and integration tests, continuous integration, docker support, API documentation, pagination, etc. For more details about the features, check the list below.
