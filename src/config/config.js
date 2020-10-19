@@ -24,7 +24,7 @@ const envVarsSchema = Joi.object()
         TWITTER_CONSUMER_SECRET: Joi.string().description('twitter consumer secret'),
         TWITTER_ACCESS_TOKEN: Joi.string().description('twitter access token'),
         TWITTER_TOKEN_SECRET: Joi.string().description('twitter token secret'),
-        TWITTER_BEARER_TOKEN: Joi.string().required().description('twitter bearer token'),
+        TWITTER_BEARER_TOKEN: Joi.string().description('twitter bearer token'),
     })
     .unknown()
 
